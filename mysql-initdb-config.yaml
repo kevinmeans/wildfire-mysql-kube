@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb-config
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS purple_air;
+    CREATE TABLE purple_air.purple_air_data (sensor_index  INT,last_seen  INT,name  VARCHAR(256),latitude  FLOAT,longitude  FLOAT,channel_flags  NUMERIC,confidence  NUMERIC,pm2_5  NUMERIC,pm2_5_a  NUMERIC,pm2_5_b  NUMERIC,pm10_0  NUMERIC,pm10_0_a  NUMERIC,pm10_0_b  NUMERIC);
+    CREATE TABLE purple_air.smoke_radius (offend_time  INT,latitude  FLOAT,longitude  FLOAT);
+    CREATE TABLE purple_air.polygon (offend_time  INT,latitude_pt1  FLOAT,longitude_pt1  FLOAT,latitude_pt2  FLOAT,longitude_pt2  FLOAT,latitude_pt3  FLOAT,longitude_pt3  FLOAT);
+    CREATE USER 'USER'@'%' IDENTIFIED WITH mysql_native_password BY  'PASSWORD';
+    GRANT ALL PRIVILEGES ON *.* TO 'USER'@'%';
+    FLUSH PRIVILEGES;
